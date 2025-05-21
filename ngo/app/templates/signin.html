@@ -1,0 +1,55 @@
+{% extends "base.html" %} {% load static %}
+{% block title %}NGO | Sign-IN{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4">Sign In</h3>
+
+                    {% if errmsg %}
+                        <div class="alert alert-danger">{{ errmsg }}</div>
+                    {% endif %}
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="role" class="form-label">Login As</label>
+                            <select name="role" class="form-select" required>
+                                <option value="">-- Select Role --</option>
+                                <option value="admin">Admin</option>
+                                <option value="employee">Employee</option>
+                                <option value="volunteer">Volunteer</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="uname" class="form-label">Username</label>
+                            <input type="text" name="uname" class="form-control" placeholder="Enter your username" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="upass" class="form-label">Password</label>
+                            <input type="password" name="upass" class="form-control" placeholder="Enter your password" required>
+                        </div>
+
+                        <div class="d-grid mb-3">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+
+                        <div class="text-end">
+                            <a href="{% url 'request_password_reset' %}">Forgot Password?</a>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
